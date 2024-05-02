@@ -25,6 +25,7 @@ class Patient extends Model
         'Adresse',
         'Antecedent',
         'Sexe',
+        'photo',
         'statut',
     ];
     protected $table = 'patients';

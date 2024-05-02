@@ -23,6 +23,14 @@ class AuthController extends Controller
 
         $role = Role::where('libelle', 'patient')->first();
         $code = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $extension = $photo->getClientOriginalExtension();
+            $photoName = time() . '.' . $extension;
+            $photo->move('photos_patients', $photoName);
+        } else {
+            $photoName = null;
+        }
         $user = Patient::create([
             'Nom' => $request->Nom,
             'Prenom' => $request->Prenom,
@@ -36,6 +44,7 @@ class AuthController extends Controller
             'Antecedent' => $request->Antecedent,
             'Adresse' => $request->Adresse,
             'statut' => 1,
+            'photo' => $photoName,
             'Motdepasse' => Hash::make($request->Motdepasse),
 
         ]);
@@ -46,7 +55,14 @@ class AuthController extends Controller
     {
         $role = Role::where('libelle', 'medecin')->first();
         $code = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
-
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $extension = $photo->getClientOriginalExtension();
+            $photoName = time() . '.' . $extension;
+            $photo->move('photos_medecins', $photoName);
+        } else {
+            $photoName = null;
+        }
         $user = Medecin::create([
             'Nom' => $request->Nom,
             'Prenom' => $request->Prenom,
@@ -59,6 +75,7 @@ class AuthController extends Controller
             'Email' => $request->Email,
             'AdresseCab' => $request->AdresseCab,
             'statut' => 1,
+            'photo' => $photoName,
             'Motdepasse' => Hash::make($request->password),
         ]);
         return $user;

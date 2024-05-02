@@ -23,6 +23,7 @@ class Medecin extends Model
         'Motdepasse',
         'Tel',
         'AdresseCab',
+        'photo',
         'statut',
     ];
 
