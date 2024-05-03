@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 01 mai 2024 à 21:27
+-- Généré le : jeu. 02 mai 2024 à 22:23
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.1.17
 
@@ -88,15 +88,17 @@ CREATE TABLE `medecins` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `sexe` varchar(255) NOT NULL,
-  `code` varchar(255) NOT NULL
+  `code` varchar(255) NOT NULL,
+  `photo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `medecins`
 --
 
-INSERT INTO `medecins` (`id`, `Nom`, `Prenom`, `role_id`, `id_specialite`, `HoraireConsultation`, `Tel`, `Email`, `AdresseCab`, `Motdepasse`, `Statut`, `created_at`, `updated_at`, `sexe`, `code`) VALUES
-(1, 'Doee', 'John', 3, 1, '9H-12H', '1234567890', 'medecin@example.com', 'dakar', '$2y$12$nNuCqE543q077lUxPYZZTuhe.1aQl3PgdViUUa5WbYHP7S32tgriu', '1', '2024-05-01 17:17:30', '2024-05-01 17:17:30', 'femme', 'tHs1WFdqiS');
+INSERT INTO `medecins` (`id`, `Nom`, `Prenom`, `role_id`, `id_specialite`, `HoraireConsultation`, `Tel`, `Email`, `AdresseCab`, `Motdepasse`, `Statut`, `created_at`, `updated_at`, `sexe`, `code`, `photo`) VALUES
+(1, 'Doee', 'John', 3, 1, '9H-12H', '1234567890', 'medecin@example.com', 'dakar', '$2y$12$nNuCqE543q077lUxPYZZTuhe.1aQl3PgdViUUa5WbYHP7S32tgriu', '1', '2024-05-01 17:17:30', '2024-05-01 17:17:30', 'femme', 'tHs1WFdqiS', NULL),
+(2, 'Doee', 'John', 3, 1, '9H-12H', '1234567890', 'johndoe@example.com', 'dakar', '$2y$12$8/YTw.eqLkOL41h9F7F58efAvY8PxmPfhhW/yK8b5FVDcgGKrngdS', '1', '2024-05-02 20:22:16', '2024-05-02 20:22:16', 'femme', '0KhE1zbnAe', NULL);
 
 -- --------------------------------------------------------
 
@@ -131,7 +133,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (14, '2024_05_01_165730_update_patients_tables', 10),
 (15, '2024_05_01_165827_update_medecins_tables', 10),
 (16, '2024_05_01_170100_create_administrateurs_tables', 11),
-(17, '2024_05_01_172304_update_administrateurs_tables', 12);
+(17, '2024_05_01_172304_update_administrateurs_tables', 12),
+(18, '2024_05_02_194613_update_medecins_table', 13);
 
 -- --------------------------------------------------------
 
@@ -155,15 +158,16 @@ CREATE TABLE `patients` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `sexe` varchar(255) NOT NULL,
-  `code` varchar(255) NOT NULL
+  `code` varchar(255) NOT NULL,
+  `photo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `patients`
 --
 
-INSERT INTO `patients` (`id`, `Nom`, `Prenom`, `role_id`, `DateNaissance`, `Tel`, `Email`, `Adresse`, `Motdepasse`, `Description`, `Antecedent`, `Statut`, `created_at`, `updated_at`, `sexe`, `code`) VALUES
-(1, 'Doe', 'John', 2, '1990-01-01', '1234567890', 'patient@example.com', 'dakar', '$2y$12$nNuCqE543q077lUxPYZZTuhe.1aQl3PgdViUUa5WbYHP7S32tgriu', 'Patient description', 'Patient antecedent', '1', '2024-05-01 17:16:38', '2024-05-01 17:16:38', 'femme', 'NfmHMJ3RpU');
+INSERT INTO `patients` (`id`, `Nom`, `Prenom`, `role_id`, `DateNaissance`, `Tel`, `Email`, `Adresse`, `Motdepasse`, `Description`, `Antecedent`, `Statut`, `created_at`, `updated_at`, `sexe`, `code`, `photo`) VALUES
+(1, 'Doe', 'John', 2, '1990-01-01', '1234567890', 'patient@example.com', 'dakar', '$2y$12$nNuCqE543q077lUxPYZZTuhe.1aQl3PgdViUUa5WbYHP7S32tgriu', 'Patient description', 'Patient antecedent', '1', '2024-05-01 17:16:38', '2024-05-01 17:16:38', 'femme', 'NfmHMJ3RpU', NULL);
 
 -- --------------------------------------------------------
 
@@ -323,13 +327,13 @@ ALTER TABLE `fiche_medical`
 -- AUTO_INCREMENT pour la table `medecins`
 --
 ALTER TABLE `medecins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `patients`
