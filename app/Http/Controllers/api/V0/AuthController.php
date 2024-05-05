@@ -23,6 +23,16 @@ class AuthController extends Controller
 
         $role = Role::where('libelle', 'patient')->first();
         $code = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+        // verifier si l'email n'est pas encore enregistre dans la bdd
+        $email = $request->Email;
+        $emailExistAmongPatient = Medecin::where('Email', $email)->first();
+        $emailExistAmongAdmin = Admin::where('email', $email)->first();
+        $emailExistAmongMedecin = Medecin::where('Email', $email)->first();
+        $emailExist = $emailExistAmongPatient || $emailExistAmongAdmin || $emailExistAmongMedecin;
+
+        if ($emailExist) {
+            return response(['message' => 'email already exist'], HttpResponse::HTTP_UNAUTHORIZED);
+        }
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
             $extension = $photo->getClientOriginalExtension();
@@ -48,9 +58,18 @@ class AuthController extends Controller
             'Motdepasse' => Hash::make($request->Motdepasse),
 
         ]);
-        return $user;
-        // return response($user,Response::HTTP_CREATED);
+        if ($user) {
+            // response de succes
+            return Response(
+                ['message' => 'medecin saved'],
+                HttpResponse::HTTP_CREATED
+            );
+        } else {
+            return response(['message' => 'error'], HttpResponse::HTTP_UNAUTHORIZED);
+        }
     }
+
+    // register medecin
     public function registerMedecin(Request $request)
     {
         $role = Role::where('libelle', 'medecin')->first();
@@ -62,6 +81,17 @@ class AuthController extends Controller
             $photo->move('photos_medecins', $photoName);
         } else {
             $photoName = null;
+        }
+
+        // verifier si l'email n'est pas encore enregistre dans la bdd
+        $email = $request->Email;
+        $emailExistAmongPatient = Medecin::where('Email', $email)->first();
+        $emailExistAmongAdmin = Admin::where('email', $email)->first();
+        $emailExistAmongMedecin = Medecin::where('Email', $email)->first();
+        $emailExist = $emailExistAmongPatient || $emailExistAmongAdmin || $emailExistAmongMedecin;
+        
+        if ($emailExist) {
+            return response(['message' => 'email already exist'], HttpResponse::HTTP_UNAUTHORIZED);
         }
         $user = Medecin::create([
             'Nom' => $request->Nom,
@@ -78,14 +108,31 @@ class AuthController extends Controller
             'photo' => $photoName,
             'Motdepasse' => Hash::make($request->password),
         ]);
-        return $user;
+
+        if($user){
+            // response de succes
+             return Response(['message'=>'medecin saved'],
+             HttpResponse::HTTP_CREATED);
+        }else{
+            return response(['message' => 'error'], HttpResponse::HTTP_UNAUTHORIZED);
+        }
     }
+
     // register admin
     public function registerAdmin(Request $request)
     {
         $role = Role::where('libelle', 'admin')->first();
         $code = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+        // verifier si l'email n'est pas encore enregistre dans la bdd
+        $email = $request->Email;
+        $emailExistAmongPatient = Medecin::where('Email', $email)->first();
+        $emailExistAmongAdmin = Admin::where('email', $email)->first();
+        $emailExistAmongMedecin = Medecin::where('Email', $email)->first();
+        $emailExist = $emailExistAmongPatient || $emailExistAmongAdmin || $emailExistAmongMedecin;
 
+        if ($emailExist) {
+            return response(['message' => 'email already exist'], HttpResponse::HTTP_UNAUTHORIZED);
+        }
         $user = Admin::create([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
@@ -98,52 +145,18 @@ class AuthController extends Controller
             'statut' => 1,
             'password' => Hash::make($request->password),
         ]);
-        return $user;
+        if ($user) {
+            // response de succes
+            return Response(
+                ['message' => 'admin saved'],
+                HttpResponse::HTTP_CREATED
+            );
+        } else {
+            return response(['message' => 'error'], HttpResponse::HTTP_UNAUTHORIZED);
+        }
     }
 
-    // simple login function
-    // public function login(Request $request)
-    // {
-    //     Auth::attempt($request->only('Email', 'Motdepasse'));
-    //     if (Auth::check()) {
-    //         // cree un token
-
-    //         // verifier si c'est un admin,patient ou medecin
-    //         $user = Auth::user();
-    //         $role_id = $user->role_id;
-    //         $role = Role::find($role_id)->libelle;
-    //         $token = $user->createToken('token')->plainTextToken;
-    //         switch ($role) {
-    //             case 'administrateur':
-    //                 $cookie = cookie('jwt', $token, 60 * 24); // 1 day
-    //                 return \response([
-    //                     'jwt' => $token
-    //                 ])->withCookie($cookie);
-    //                 break;
-    //             case 'medecin':
-    //                 $cookie = cookie('jwt', $token, 60 * 24); // 1 day
-    //                 return \response([
-    //                     'jwt' => $token
-    //                 ])->withCookie($cookie);
-    //                 break;
-    //             case 'patient':
-    //                 $cookie = cookie('jwt', $token, 60 * 24); // 1 day
-    //                 return \response([
-    //                     'jwt' => $token
-    //                 ])->withCookie($cookie);
-    //                 break;
-    //         }
-    //         // $user = Auth::user();
-    //         // $token = $user->createToken('token')->plainTextToken;
-
-    //         // $cookie = cookie('jwt', $token, 60 * 24); // 1 day
-    //         // return \response([
-    //         //     'jwt' => $token
-    //         // ])->withCookie($cookie);
-    //     } else {
-    //         return response(['message' => 'Invalid credentials'], HttpResponse::HTTP_UNAUTHORIZED);
-    //     }
-    // }
+  
 
 
 
