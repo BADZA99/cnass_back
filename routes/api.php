@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\api\v0\AdminController;
 use App\Http\Controllers\api\V0\AuthController;
+use App\Http\Controllers\api\v0\MedecinController;
+use App\Http\Controllers\api\v0\PatientController;
 use App\Http\Controllers\api\V0\RoleController;
 use App\Http\Controllers\api\v0\SpecialitesController;
 use Illuminate\Http\Request;
@@ -25,6 +28,23 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [AuthController::class, 'user']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
+
+
+
+// medecins
+Route::get('/medecins', [MedecinController::class, 'AllMedecins']);
+
+
+// patients
+Route::get('/patients', [PatientController::class, 'AllPatients']);
+
+// admin
+Route::get('/admins', [AdminController::class, 'AllAdmins']);
+
+
+
+
+
 
 // roles 
 Route::get('/roles', [RoleController::class, 'AllRoles']);
