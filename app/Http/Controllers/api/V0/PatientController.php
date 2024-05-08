@@ -14,4 +14,45 @@ class PatientController extends Controller
             $patients = Patient::all();
             return $patients;
         }
+
+        // upadte patient
+        public function updatePatient(Request $request, $id)
+        {
+            $patient = Patient::find($id);
+
+            if(!$patient){
+                return response()->json(['message' => 'Patient introuvable'], 404);
+            }
+        //  mettre a jour le Nom,Prenom,Adresse,Antecedent,Description
+        $patient->update([
+            'Nom' => $request->Nom,
+            'Prenom' => $request->Prenom,
+            'Adresse' => $request->Adresse,
+            'Antecedent' => $request->Antecedent,
+            'Description' => $request->Description,
+        ]);
+
+        // envoyer message erreur si la maj s'est mal passer
+        if(!$patient){
+            return response()->json(['message' => 'Erreur lors de la mise a jour'], 500);
+        }
+
+        // retourner un message de succes
+        return response()->json(['message' => 'Patient mis a jour avec succes'], 200);
+
+        }
+
+        // supprimer un patient
+        public function deletePatient($id)
+        {
+            $patient = Patient::find($id);
+
+            if(!$patient){
+                return response()->json(['message' => 'Patient introuvable'], 404);
+            }
+
+            $patient->delete();
+
+            return response()->json(['message' => 'Patient supprime avec succes'], 200);
+        }
 }
