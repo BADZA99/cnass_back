@@ -10,8 +10,12 @@ class Fiche_Medical extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id_patient',
+        'Poids',
+        'Taille',
+        'Tension',
         'Description',
-        // todo id_patient
-        'statut',
     ];
+
+    protected $table = 'Fiche_Medical';
 }

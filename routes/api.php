@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\v0\AdminController;
 use App\Http\Controllers\api\V0\AuthController;
+use App\Http\Controllers\api\v0\FicheMedicalController;
 use App\Http\Controllers\api\v0\MedecinController;
 use App\Http\Controllers\api\v0\PatientController;
 use App\Http\Controllers\api\V0\RoleController;
@@ -29,6 +30,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
+// notifications
+Route::get('sendMail/{id}', [AuthController::class, 'sendEmail']);
+
 
 // medecins
 Route::get('/medecins', [MedecinController::class, 'AllMedecins']);
@@ -55,3 +59,9 @@ Route::get('/roles', [RoleController::class, 'AllRoles']);
 
 // specilaites
 Route::get('/specialites', [SpecialitesController::class, 'AllSpecialites']);
+
+// fiches medical
+Route::post('/createFicheMedical', [FicheMedicalController::class, 'createFicheMedical']);
+Route::put('/updateFicheMedical/{idPatient}', [FicheMedicalController::class, 'updateFicheMedical']);
+Route::delete('/deleteFicheMedical/{idPatient}', [FicheMedicalController::class, 'deleteFicheMedical']);
+
