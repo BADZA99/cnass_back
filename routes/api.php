@@ -32,6 +32,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // medecins
 Route::get('/medecins', [MedecinController::class, 'AllMedecins']);
+Route::put('/DesactiverMedecin/{id}', [MedecinController::class, 'desactiverMedecin']);
+Route::put('/ActiverMedecin/{id}', [MedecinController::class, 'activerMedecin']);
 
 
 // patients
@@ -39,6 +41,7 @@ Route::get('/patients', [PatientController::class, 'AllPatients']);
 Route::put('/UpdatePatient/{id}', [PatientController::class, 'updatePatient']);
 Route::delete('/DeletePatient/{id}', [PatientController::class, 'deletePatient']);
 Route::put('/DesactiverPatient/{id}', [PatientController::class, 'desactiverPatient']);
+Route::put('/ActiverPatient/{id}', [PatientController::class, 'activerPatient']);
 
 
 

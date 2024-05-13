@@ -63,9 +63,26 @@ class PatientController extends Controller
             }
 
             $patient->update([
-                'Statut' => 0
+            'Statut' => 0
             ]);
 
             return response()->json(['message' => 'Patient desactivé avec succes'], 200);
         }
+
+        // activer un patient
+        public function activerPatient($id)
+        {
+            $patient = Patient::find($id);
+
+            if(!$patient){
+                return response()->json(['message' => 'Patient introuvable'], 404);
+            }
+
+            $patient->update([
+                'Statut' => 1
+            ]);
+
+            return response()->json(['message' => 'Patient activé avec succes'], 200);
+        }
+    
 }

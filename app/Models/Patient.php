@@ -26,7 +26,7 @@ class Patient extends Model
         'Antecedent',
         'Sexe',
         'photo',
-        'statut',
+        'Statut',
     ];
     protected $table = 'patients';
 }

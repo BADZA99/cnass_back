@@ -24,7 +24,7 @@ class Medecin extends Model
         'Tel',
         'AdresseCab',
         'photo',
-        'statut',
+        'Statut',
     ];
 
     protected $table = 'medecins';
