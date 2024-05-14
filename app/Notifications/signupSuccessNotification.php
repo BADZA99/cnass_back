@@ -15,12 +15,17 @@ class signupSuccessNotification extends Notification
     public $role;
     public $email;
     public $code;
-    public function __construct()
+    public function __construct(
+        string $name,
+        string $role,
+        string $email,
+        string $code
+    )
     {
-        // $this->name = $name;
-        // $this->role = $role;
-        // $this->email = $email;
-        // $this->code = $code;
+        $this->name = $name;
+        $this->role = $role;
+        $this->email = $email;
+        $this->code = $code;
     }
 
     /**
@@ -40,11 +45,11 @@ class signupSuccessNotification extends Notification
     {
         return (new MailMessage)
             ->subject('Inscription réussie')
-            ->greeting('Bonjour, ' . ' 👋')
+            ->greeting('Bonjour ' . $this->name . ', 👋')
             ->line('Nous sommes ravis de vous informer que votre inscription sur UD s\'est bien passée.')
-            ->line('Votre rôle est : ' )
-            ->line('Votre email est : ' )
-            ->line('Votre code est : ' )
+            ->line('Votre rôle est : ' . $this->role)
+            ->line('Votre email est : ' . $this->email)
+            ->line('Votre code est : ' . $this->code)
             // ->action('Visitez notre site', url('/'))
             ->line('Merci d\'avoir choisi notre application!');
     }

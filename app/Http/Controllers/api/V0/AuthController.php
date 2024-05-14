@@ -21,49 +21,32 @@ class AuthController extends Controller
 {
     // send email
 
-    public function sendEmail($id)
+    public function sendEmail($id, $userType)
     {
-        // switch ($userType) {
-        //     case 'Admin':
-        //         $user = Admin::find($id);
-        //         $user->notify(new signupSuccessNotification($user->prenom, $userType, $user->email, $user->code));
-        //         break;
-        //     case 'Patient':
-        //         $user = Patient::find($id);
-        //         $user->notify(new signupSuccessNotification($user->Prenom, $userType, $user->Email, $user->code));
-        //         break;
-            // case 'Medecin':
-                $user = Patient::find($id);
-try {
-    $emailsent =$user->notify(new signupSuccessNotification());
-    if($emailsent){
-        return response()->json(['message' => 'email sent'], Response::HTTP_OK);
-    }
-} catch (\Exception $e) {
-    return response()->json(['message' => 'email not sent', 'error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
-}
-                // if($user){
-                //     $emailsent=$user->notify(new signupSuccessNotification($user->Prenom, "medecin", $user->Email, $user->code));
 
-                //     if($emailsent){
-                //         return response()->json(['message' => 'email sent'], Response::HTTP_OK);
-                //     }else{
-                //         return response()->json(['message' => 'email not sent'], Response::HTTP_BAD_REQUEST);
-                    
-                //     }
-                // }
-              
-        //         break;
-        //     default:
-        //         return response()->json(['message' => 'Invalid user type'], Response::HTTP_BAD_REQUEST);
-        // }
+        switch ($userType) {
+            case 'Admin':
+                $user = Admin::find($id);
+                $user->notify(new signupSuccessNotification($user->Nom, 'Admin', $user->email, $user->code));
+                break;
+            case 'Patient':
+                $user = Patient::find($id);
+                $user->notify(new signupSuccessNotification($user->nom, 'Patient', $user->email, $user->code));
+                break;
+            case 'Medecin':
+                $user = Medecin::find($id);
+                $user->notify(new signupSuccessNotification($user->Nom, 'Medecin', $user->email, $user->code));
+                break;
+            default:
+                return response()->json(['message' => 'Invalid user type'], Response::HTTP_BAD_REQUEST);
+        }
+
 
         if (!$user) {
             return response()->json(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
         }
 
-
-       
+        return response()->json(['message' => 'email sent'], Response::HTTP_OK);
     }
 
 
@@ -114,7 +97,7 @@ try {
             $this->sendEmail($user->id, 'Patient');
             // response de succes
             return Response(
-                ['message' => 'medecin saved'],
+                ['message' => 'medecin saved check your email'],
                 HttpResponse::HTTP_CREATED
             );
         } else {
@@ -164,7 +147,7 @@ try {
 
         if ($user) {
             // envoyer email
-            // $this->sendEmail($user->id, 'Medecin');
+            $this->sendEmail($user->id, 'Medecin');
             // response de succes
             return Response(
                 ['message' => 'medecin saved'],
