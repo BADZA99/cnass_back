@@ -19,7 +19,7 @@ class Medecin extends Model
         'role_id',
         'id_specialite',
         'HoraireConsultation',
-        'Email',
+        'email',
         'Motdepasse',
         'Tel',
         'AdresseCab',

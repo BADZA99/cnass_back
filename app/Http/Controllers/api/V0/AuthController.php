@@ -33,7 +33,7 @@ class AuthController extends Controller
         //         $user->notify(new signupSuccessNotification($user->Prenom, $userType, $user->Email, $user->code));
         //         break;
             // case 'Medecin':
-                $user = Medecin::find($id);
+                $user = Patient::find($id);
 try {
     $emailsent =$user->notify(new signupSuccessNotification());
     if($emailsent){
@@ -75,8 +75,8 @@ try {
         $role = Role::where('libelle', 'patient')->first();
         $code = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
         // verifier si l'email n'est pas encore enregistre dans la bdd
-        $email = $request->Email;
-        $emailExistAmongPatient = Medecin::where('Email', $email)->first();
+        $email = $request->email;
+        $emailExistAmongPatient = Patient::where('email', $email)->first();
         $emailExistAmongAdmin = Admin::where('email', $email)->first();
         $emailExistAmongMedecin = Medecin::where('Email', $email)->first();
         $emailExist = $emailExistAmongPatient || $emailExistAmongAdmin || $emailExistAmongMedecin;
@@ -101,10 +101,10 @@ try {
             'sexe' => $request->sexe,
             'code' => $code,
             'role_id' => $request->role_id,
-            'Email' => $request->Email,
+            'email' => $request->email,
             'Antecedent' => $request->Antecedent,
             'Adresse' => $request->Adresse,
-            'statut' => 1,
+            'Statut' => 1,
             'photo' => $photoName,
             'Motdepasse' => Hash::make($request->Motdepasse),
 
@@ -137,10 +137,10 @@ try {
         }
 
         // verifier si l'email n'est pas encore enregistre dans la bdd
-        $email = $request->Email;
-        $emailExistAmongPatient = Medecin::where('Email', $email)->first();
+        $email = $request->email;
+        $emailExistAmongPatient = Patient::where('email', $email)->first();
         $emailExistAmongAdmin = Admin::where('email', $email)->first();
-        $emailExistAmongMedecin = Medecin::where('Email', $email)->first();
+        $emailExistAmongMedecin = Medecin::where('email', $email)->first();
         $emailExist = $emailExistAmongPatient || $emailExistAmongAdmin || $emailExistAmongMedecin;
 
         if ($emailExist) {
@@ -155,7 +155,7 @@ try {
             'HoraireConsultation' => $request->HoraireConsultation,
             'Tel' => $request->Tel,
             'role_id' => $request->role_id,
-            'Email' => $request->Email,
+            'email' => $request->email,
             'AdresseCab' => $request->AdresseCab,
             'Statut' => 1,
             'photo' => $photoName,
@@ -164,7 +164,7 @@ try {
 
         if ($user) {
             // envoyer email
-            $this->sendEmail($user->id, 'Medecin');
+            // $this->sendEmail($user->id, 'Medecin');
             // response de succes
             return Response(
                 ['message' => 'medecin saved'],
@@ -221,10 +221,10 @@ try {
 
     public function login(Request $request)
     {
-        $credentials = $request->only('Email', 'password');
+        $credentials = $request->only('email', 'password');
 
         // Check in Medecin model
-        $medecin = Medecin::where('Email', $credentials['Email'])->first();
+        $medecin = Medecin::where('email', $credentials['email'])->first();
         if ($medecin && Hash::check($credentials['password'], $medecin->Motdepasse)) {
             $token = $medecin->createToken('token')->plainTextToken;
             $cookie = cookie('jwt', $token, 60 * 24); // 1 day
@@ -235,7 +235,7 @@ try {
         }
 
         // Check in Administrateur model
-        $administrateur = Admin::where('Email', $credentials['Email'])->first();
+        $administrateur = Admin::where('email', $credentials['email'])->first();
         if ($administrateur && Hash::check($credentials['password'], $administrateur->password)) {
             $token = $administrateur->createToken('token')->plainTextToken;
             $cookie = cookie('jwt', $token, 60 * 24); // 1 day
@@ -246,7 +246,7 @@ try {
         }
 
         // Check in Patient model
-        $patient = Patient::where('Email', $credentials['Email'])->first();
+        $patient = Patient::where('email', $credentials['email'])->first();
         if ($patient && Hash::check($credentials['password'], $patient->Motdepasse)) {
             $token = $patient->createToken('token')->plainTextToken;
             $cookie = cookie('jwt', $token, 60 * 24); // 1 day
