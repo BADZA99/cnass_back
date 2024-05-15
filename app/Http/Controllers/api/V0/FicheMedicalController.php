@@ -4,10 +4,14 @@ namespace App\Http\Controllers\api\v0;
 
 use App\Http\Controllers\Controller;
 use App\Models\Fiche_Medical;
+use App\Models\Patient;
+use App\Notifications\CreationFicheMedecalReussiNotification;
 use Illuminate\Http\Request;
 
 class FicheMedicalController extends Controller
 {
+    // fonction qui va envoyer le mail notifiant la creation de la fiche medical
+
     //fonction qui cree une fiche medical 
     public function createFicheMedical(Request $request)
     {
@@ -18,10 +22,27 @@ class FicheMedicalController extends Controller
         $fiche->Tension = $request->Tension;
         $fiche->Description = $request->Description;
 
-        if($fiche->save()){
+        if ($fiche->save()) {
+            $patient = Patient::find($fiche->id_patient);
 
-            return response()->json(['message' => 'Fiche medical cree avec succes'], 201);
-        }else{
+            if($patient){
+                $patient->notify(new CreationFicheMedecalReussiNotification(
+                    $patient->Nom,
+                    $patient->Prenom,
+                    $fiche->Taille,
+                    $fiche->Poids,
+                    $fiche->Tension,
+                    $fiche->Description
+                ));
+                return response()->json(['message' => 'Fiche medical cree avec succes'], 201);
+            }else{
+                return response()->json([
+                    'message' => 'patient not found'
+                    ], 404);
+            }
+
+            return response()->json(['message' => 'Fiche medical cree avec succes mais email pas envoye'], 201);
+        } else{
             return response()->json(['message' => 'Erreur lors de la creation de la fiche medical'], 400);
         }
         
