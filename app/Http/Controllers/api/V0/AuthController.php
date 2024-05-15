@@ -27,11 +27,11 @@ class AuthController extends Controller
         switch ($userType) {
             case 'Admin':
                 $user = Admin::find($id);
-                $user->notify(new signupSuccessNotification($user->Nom, 'Admin', $user->email, $user->code));
+                $user->notify(new signupSuccessNotification($user->nom, 'Admin', $user->email, $user->code));
                 break;
             case 'Patient':
                 $user = Patient::find($id);
-                $user->notify(new signupSuccessNotification($user->nom, 'Patient', $user->email, $user->code));
+                $user->notify(new signupSuccessNotification($user->Nom, 'Patient', $user->email, $user->code));
                 break;
             case 'Medecin':
                 $user = Medecin::find($id);

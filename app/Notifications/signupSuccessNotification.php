@@ -46,7 +46,7 @@ class signupSuccessNotification extends Notification
         return (new MailMessage)
             ->subject('Inscription réussie')
             ->greeting('Bonjour ' . $this->name . ', 👋')
-            ->line('Nous sommes ravis de vous informer que votre inscription sur UD s\'est bien passée.')
+            ->line('Nous sommes ravis de vous informer que votre inscription sur Cnass s\'est bien passée.')
             ->line('Votre rôle est : ' . $this->role)
             ->line('Votre email est : ' . $this->email)
             ->line('Votre code est : ' . $this->code)

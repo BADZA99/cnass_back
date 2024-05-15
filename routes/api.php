@@ -6,6 +6,7 @@ use App\Http\Controllers\api\v0\FicheMedicalController;
 use App\Http\Controllers\api\v0\MedecinController;
 use App\Http\Controllers\api\v0\PatientController;
 use App\Http\Controllers\api\V0\RoleController;
+use App\Http\Controllers\api\v0\SmsController;
 use App\Http\Controllers\api\v0\SpecialitesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +32,12 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 // notifications
+
+// emails
 Route::get('sendMail/{id}', [AuthController::class, 'sendEmail']);
+
+// sms
+Route::get('sendSms', [SmsController::class, 'SendSms']);
 
 
 // medecins
@@ -64,4 +70,6 @@ Route::get('/specialites', [SpecialitesController::class, 'AllSpecialites']);
 Route::post('/createFicheMedical', [FicheMedicalController::class, 'createFicheMedical']);
 Route::put('/updateFicheMedical/{idPatient}', [FicheMedicalController::class, 'updateFicheMedical']);
 Route::delete('/deleteFicheMedical/{idPatient}', [FicheMedicalController::class, 'deleteFicheMedical']);
+Route::get('/ficheMedical/{idPatient}', [FicheMedicalController::class, 'getFicheMedical']);
+Route::get('/AllficheMedicals', [FicheMedicalController::class, 'AllFicheMedicals']);
 

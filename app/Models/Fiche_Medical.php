@@ -17,5 +17,5 @@ class Fiche_Medical extends Model
         'Description',
     ];
 
-    protected $table = 'Fiche_Medical';
+    protected $table = 'fiche_medical';
 }

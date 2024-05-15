@@ -20,7 +20,7 @@ class FicheMedicalController extends Controller
 
         if($fiche->save()){
 
-            return response()->json(['message' => 'Fiche medical cree avec succes'], 200);
+            return response()->json(['message' => 'Fiche medical cree avec succes'], 201);
         }else{
             return response()->json(['message' => 'Erreur lors de la creation de la fiche medical'], 400);
         }
@@ -31,6 +31,7 @@ class FicheMedicalController extends Controller
     public function updateFicheMedical(Request $request, $idPatient)
     {
         $fiche = Fiche_Medical::where('id_patient', $idPatient)->first();
+        $fiche->id_patient = $request->id_patient;
         $fiche->Poids = $request->Poids;
         $fiche->Taille = $request->Taille;
         $fiche->Tension = $request->Tension;
@@ -55,5 +56,12 @@ class FicheMedicalController extends Controller
             return response()->json(['message' => 'Erreur lors de la suppression de la fiche medical'], 400);
         }
     }
+
+    // tous les fiches
+    public function AllFicheMedicals(){
+        $fiche = Fiche_Medical::all();
+        return response()->json($fiche, 200);
+    }
+
        
 }
