@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Fiche_Medical;
 use App\Models\Patient;
 use App\Notifications\CreationFicheMedecalReussiNotification;
+use App\Notifications\UpdateFicheMedecalReussiNotification;
 use Illuminate\Http\Request;
 
 class FicheMedicalController extends Controller
@@ -59,7 +60,22 @@ class FicheMedicalController extends Controller
         $fiche->Description = $request->Description;
 
         if($fiche->save()){
-            return response()->json(['message' => 'Fiche medical modifie avec succes'], 200);
+            $patient = Patient::find($fiche->id_patient);
+            if($patient){
+                $patient->notify(new UpdateFicheMedecalReussiNotification(
+                    $patient->Nom,
+                    $patient->Prenom,
+                    $fiche->Taille,
+                    $fiche->Poids,
+                    $fiche->Tension,
+                    $fiche->Description
+                ));
+                return response()->json(['message' => 'Fiche medical modifie avec succes'], 200);
+            }else{
+                return response()->json([
+                    'message' => 'patient not found'
+                    ], 404);
+            }
         }else{
             return response()->json(['message' => 'Erreur lors de la modification de la fiche medical'], 400);
         }

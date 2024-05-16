@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 15 mai 2024 à 02:42
+-- Généré le : jeu. 16 mai 2024 à 01:55
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.1.17
 
@@ -72,7 +72,10 @@ CREATE TABLE `fiche_medical` (
 --
 
 INSERT INTO `fiche_medical` (`id`, `id_patient`, `Poids`, `Taille`, `Tension`, `Description`, `created_at`, `updated_at`) VALUES
-(1, 1, '75', '180', '120/80', 'Patient in good health, gained 5kg', '2024-05-13 15:14:07', '2024-05-13 15:16:20');
+(1, 1, '75', '180', '120/80', 'Patient in good health, gained 5kg', '2024-05-13 15:14:07', '2024-05-13 15:16:20'),
+(6, 1, '70', '189', '120/80', 'orllrkfjghghghjgjjjt', '2024-05-15 15:17:59', '2024-05-15 15:17:59'),
+(7, 2, '70', '190', '170/20', 'a perdu du poids recemment', '2024-05-15 23:09:08', '2024-05-15 23:09:08'),
+(9, 3, '120', '185', '170/20', 'en obesite', '2024-05-15 23:36:01', '2024-05-15 23:49:11');
 
 -- --------------------------------------------------------
 
@@ -106,8 +109,8 @@ CREATE TABLE `medecins` (
 INSERT INTO `medecins` (`id`, `Nom`, `Prenom`, `role_id`, `id_specialite`, `HoraireConsultation`, `Tel`, `email`, `AdresseCab`, `Motdepasse`, `Statut`, `created_at`, `updated_at`, `sexe`, `code`, `photo`) VALUES
 (5, 'diouf', 'babacar', 3, 8, '15H-18H', '774327640', 'mapaye999@gmail.com', 'fass mbao', '$2y$12$nNuCqE543q077lUxPYZZTuhe.1aQl3PgdViUUa5WbYHP7S32tgriu', '1', '2024-05-06 14:19:15', '2024-05-13 11:21:49', 'Homme', '6Prep4CKj7', '1715005154.png'),
 (6, 'didier', 'raoult', 3, 1, '12H-18H', '123456788', 'medecin@etopys.com', 'paris', '$2y$12$nNuCqE543q077lUxPYZZTuhe.1aQl3PgdViUUa5WbYHP7S32tgriu', '1', '2024-05-13 12:02:08', '2024-05-13 12:02:08', 'Homme', 'NxJafdvESm', '1715601727.png'),
-(7, 'diouf', 'maty', 3, 7, '15H-18H', '123456788', 'naxoven709@ahieh.com', 'paris', '$2y$12$dk/B7VvQ6JBCt/t.M7478eTTsvIE11PBt/cQmIm4ENQOomQ9aBwP.', '1', '2024-05-13 12:04:16', '2024-05-13 12:04:16', 'Homme', 'WDcqK4kXPl', '1715601856.png'),
-(9, 'ndiaye', 'papa', 3, 9, '9H-18H', '3333333333333333333', 'karega6390@hisotyr.com', 'DAKAR', '$2y$12$4gon8O06oDZsHb6g9xKZTOq0ibDTBxv4Qslk9oPFxaU/SML3I4Sqm', '1', '2024-05-14 23:08:57', '2024-05-14 23:08:57', 'Homme', '9NHnKDxEGR', '1715728137.png'),
+(7, 'diouf', 'maty', 3, 7, '15H-18H', '123456788', 'naxoven709@ahieh.com', 'paris', '$2y$12$dk/B7VvQ6JBCt/t.M7478eTTsvIE11PBt/cQmIm4ENQOomQ9aBwP.', '1', '2024-05-13 12:04:16', '2024-05-15 10:05:17', 'Homme', 'WDcqK4kXPl', '1715601856.png'),
+(9, 'ndiaye', 'papa', 3, 9, '9H-18H', '3333333333333333333', 'karega6390@hisotyr.com', 'DAKAR', '$2y$12$4gon8O06oDZsHb6g9xKZTOq0ibDTBxv4Qslk9oPFxaU/SML3I4Sqm', '1', '2024-05-14 23:08:57', '2024-05-15 12:36:44', 'Homme', '9NHnKDxEGR', '1715728137.png'),
 (11, 'ndiaye', 'papa', 3, 8, '9H-18H', '3333333333333333333', 'tesy@example.com', 'DAKAR', '$2y$12$C2LNzs63Eh.G5o2FRXGyuOzeZxzX0MU5bLmE4duinA1ZCq05sRJNS', '1', '2024-05-14 23:21:40', '2024-05-14 23:21:40', 'Homme', 'aQ4ZO9EDhj', '1715728900.png'),
 (13, 'EMAIL', 'TEST', 3, 6, '12H-15H', '3333333333', 'vadin25582@godsigma.com', 'DAKAR', '$2y$12$.lk7oWzm8VoPPJ.YhcBzOemPyagfipCKWeXSp.AqLGSANGocyDbOm', '1', '2024-05-14 23:55:06', '2024-05-14 23:55:06', 'Homme', 'hQrwptzEoI', '1715730906.png');
 
@@ -181,13 +184,11 @@ CREATE TABLE `patients` (
 --
 
 INSERT INTO `patients` (`id`, `Nom`, `Prenom`, `role_id`, `DateNaissance`, `Tel`, `email`, `Adresse`, `Motdepasse`, `Description`, `Antecedent`, `Statut`, `created_at`, `updated_at`, `sexe`, `code`, `photo`) VALUES
-(1, 'faye', 'moussa', 2, '1990-01-01', '1234567890', 'patient@example.com', 'derkledd', '$2y$12$nNuCqE543q077lUxPYZZTuhe.1aQl3PgdViUUa5WbYHP7S32tgriu', 'test updatesssssss', 'non updatesss', '1', '2024-05-01 17:16:38', '2024-05-14 23:24:48', 'femme', 'NfmHMJ3RpU', '1714732435.jpg'),
+(1, 'fayeytra', 'moussagt', 2, '1990-01-01', '1234567890', 'patient@example.com', 'derkledd', '$2y$12$nNuCqE543q077lUxPYZZTuhe.1aQl3PgdViUUa5WbYHP7S32tgriu', 'tres ashmatique', 'aallergies aux poisoons', '1', '2024-05-01 17:16:38', '2024-05-15 22:57:37', 'femme', 'NfmHMJ3RpU', '1714732435.jpg'),
 (2, 'ndiaye', 'papa', 2, '2024-01-07', '776543020', 'pocifob335@ekposta.com', 'DAKAR', '$2y$12$QPJ71iOT.7yX0abXcU.7NODNjeu2XNJ0LrnVDK37IgM3LqRu2DVTC', 'malade', 'ALLERGIIIIESS3/05/2024 a ABASS NDAO en faace cto', '1', '2024-05-03 10:37:34', '2024-05-14 23:25:06', 'Femme', 'euBQ1z3Dm2', '1714732654.jpg'),
-(3, 'faye', 'badza', 2, '2024-02-12', '776545410', 'vopoyef950@godsigma.com', 'DAKAR', '$2y$12$nNuCqE543q077lUxPYZZTuhe.1aQl3PgdViUUa5WbYHP7S32tgriu', 'MALAAAAAAADE tresssssssssssssssssssss', 'ALLERGIIIIESSALLERGIIIIESSALLERGIIIIESSALLERGIIIIESSv 3/05/2024 a dantek', '1', '2024-05-03 11:24:48', '2024-05-13 15:37:09', 'Homme', 'mT1fHCR0Ay', '1714735488.jpg'),
-(7, 'GOJO', 'SATORU', 2, '2005-06-16', '890543321', 'gojo@gmail.com', 'SHIBUYA', '$2y$12$E4yA7FxrBSvcF8ru.ujSQeo5LNUdJowiD4dqZWp5nD7KDVMRH9QcW', 'JE SUIS LE SATORU', 'YEUX DE L\'INFINI 3/05/2024 a TOKYO', '1', '2024-05-08 00:31:37', '2024-05-08 00:31:37', 'Homme', '0DQK1UHL4Z', '1715128297.png'),
-(12, 'ND', 'PAPA', 2, '1990-01-01', '1234567890', 'doe@example.com', 'dakar', '$2y$12$QGhMG9Yr/c4RWJx06vpPb.qxtqigpegGowgcrUGGZ5PUP6ePLvGJ2', 'Patient description', 'Patient antecedent', '1', '2024-05-14 23:01:39', '2024-05-14 23:01:39', 'HOMME', '5vmZhcygur', NULL),
-(14, 'test', 'test', 2, '2018-03-14', '3333333333', 'fohog99414@ahieh.com', 'DAKAR', '$2y$12$o.bDqDG3ok5QAzZyRN3On.b/hqc9zCMgvFd0UHop60v4Q0m8xsHCK', 'the description', 'faiiible 3/05/2024 a TOKYO', '1', '2024-05-14 23:03:09', '2024-05-14 23:03:09', 'Homme', '57ciJvSQ9h', '1715727789.png'),
-(18, 'email', 'test', 2, '2018-02-12', '3333333333333333333', 'mejape3068@facais.com', 'DAKAR', '$2y$12$m8SKgMBWF6JG7UvDHUyaeeoqgIsws56RMBmCnI3hu2ALmEkYuDShm', 'teste', 'teste 3/05/2024 a ABASS NDAO', '1', '2024-05-14 23:48:03', '2024-05-14 23:48:03', 'Homme', 'CSsJukGd7m', '1715730483.png');
+(3, 'faye', 'badzaaa', 2, '2024-02-12', '776545410', 'neneh59582@bsomek.com', 'DAKAR', '$2y$12$nNuCqE543q077lUxPYZZTuhe.1aQl3PgdViUUa5WbYHP7S32tgriu', 'MALAAAAAAADE', 'ALLERGIIIIESSALLERGIIIIESSALLERGIIIIESSALLERGIIIIESSv 3/05/2024 a dantek', '1', '2024-05-03 11:24:48', '2024-05-15 23:33:16', 'Homme', 'mT1fHCR0Ay', '1714735488.jpg'),
+(7, 'GOJOOO', 'SATORU', 2, '2005-06-16', '890543321', 'gojo@gmail.com', 'SHIBUYA', '$2y$12$E4yA7FxrBSvcF8ru.ujSQeo5LNUdJowiD4dqZWp5nD7KDVMRH9QcW', 'LE SATORUuuu', 'YEUX DE L\'INFINI 3/05/2024 a TOKYO', '1', '2024-05-08 00:31:37', '2024-05-15 23:41:23', 'Homme', '0DQK1UHL4Z', '1715128297.png'),
+(24, 'diouf', 'madame', 2, '2022-09-12', '774908765', 'lahepe7987@godsigma.com', 'DAKARa', '$2y$12$APv3i4t2POfBCGhrewzis.P0UReRJ2YTBik4O.HjWnCmF3R0T2xnK', 'tessssssst', 'tessssstststststs 3/05/2024 a guediawaye', '1', '2024-05-15 12:06:33', '2024-05-15 12:10:11', 'Femme', 'aqYPfHwKXB', '1715774792.png');
 
 -- --------------------------------------------------------
 
@@ -273,7 +274,21 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (58, 'App\\Models\\Admin', 1, 'token', 'e3eeda3db506f34c54d618130da4b71ba5e17601531ee7805db062704324b3b8', '[\"*\"]', '2024-05-14 23:20:30', NULL, '2024-05-14 23:11:08', '2024-05-14 23:20:30'),
 (59, 'App\\Models\\Admin', 1, 'token', '6319e8ba704bbe19b9783d715d77014949edf51642f6f57581069bf253dce77f', '[\"*\"]', '2024-05-14 23:22:13', NULL, '2024-05-14 23:21:58', '2024-05-14 23:22:13'),
 (60, 'App\\Models\\Patient', 1, 'token', '0c3f4c26965082f7dc331cba3d121d2e0479c26fd93cf2f81752d0153718446f', '[\"*\"]', '2024-05-14 23:22:30', NULL, '2024-05-14 23:22:24', '2024-05-14 23:22:30'),
-(61, 'App\\Models\\Medecin', 6, 'token', 'cc227e240c66643445753251710e1abe576b58e672775c5d1d7fee226fc400ce', '[\"*\"]', '2024-05-14 23:25:20', NULL, '2024-05-14 23:23:43', '2024-05-14 23:25:20');
+(61, 'App\\Models\\Medecin', 6, 'token', 'cc227e240c66643445753251710e1abe576b58e672775c5d1d7fee226fc400ce', '[\"*\"]', '2024-05-14 23:25:20', NULL, '2024-05-14 23:23:43', '2024-05-14 23:25:20'),
+(62, 'App\\Models\\Medecin', 6, 'token', '0635787bd0db161f34e172bf40b80e7a22dc304c8dea5cc3d98fe2c612e29b6d', '[\"*\"]', '2024-05-15 09:38:54', NULL, '2024-05-15 09:33:28', '2024-05-15 09:38:54'),
+(63, 'App\\Models\\Admin', 1, 'token', '95d61fdf539239aabb50bee07cda0ae3281c7aad1885e8825f82bc93e86e71d4', '[\"*\"]', '2024-05-15 10:06:00', NULL, '2024-05-15 09:39:05', '2024-05-15 10:06:00'),
+(64, 'App\\Models\\Medecin', 6, 'token', '00ca4846373cd6945f896a87ed020011b138d0f3d15bdefe2c657b2a2e3cb9e3', '[\"*\"]', '2024-05-15 11:30:16', NULL, '2024-05-15 10:06:11', '2024-05-15 11:30:16'),
+(65, 'App\\Models\\Admin', 1, 'token', 'df03219c13c48aa6c4694789340be91b0972079b7c7f4c9ba81c3c87faf1c482', '[\"*\"]', '2024-05-15 12:08:55', NULL, '2024-05-15 12:08:32', '2024-05-15 12:08:55'),
+(66, 'App\\Models\\Medecin', 6, 'token', 'e18f27379ab44922f0c52508421ba5d5356a49fdd24ebd5e5f2fadd8dc903f00', '[\"*\"]', '2024-05-15 12:10:22', NULL, '2024-05-15 12:09:13', '2024-05-15 12:10:22'),
+(67, 'App\\Models\\Patient', 1, 'token', '3380ba24b9f6d0601c220d92c8d72ea12c1d090f8fbc1ce380f988a866f535b2', '[\"*\"]', '2024-05-15 12:11:47', NULL, '2024-05-15 12:11:18', '2024-05-15 12:11:47'),
+(68, 'App\\Models\\Patient', 1, 'token', 'f84318a5c096b53fceec2a4bc2a26119a29dfba5cbff90d855acc21178b55ada', '[\"*\"]', '2024-05-15 12:31:34', NULL, '2024-05-15 12:31:28', '2024-05-15 12:31:34'),
+(69, 'App\\Models\\Admin', 1, 'token', 'f4c7027adb8163433ddaeaa786651ed5146b0799ec66197282c590454e6d3db3', '[\"*\"]', '2024-05-15 14:32:46', NULL, '2024-05-15 12:35:53', '2024-05-15 14:32:46'),
+(70, 'App\\Models\\Medecin', 6, 'token', '16bc721e290b5ffd941ca0b83f68250d26a93cc05332997d6c4bac80b406c1c4', '[\"*\"]', '2024-05-15 17:08:59', NULL, '2024-05-15 14:38:06', '2024-05-15 17:08:59'),
+(71, 'App\\Models\\Admin', 1, 'token', 'cc790b0696e5c04defb62dad407dfdb85095dd32d5d9c0b27cf9286102d79295', '[\"*\"]', '2024-05-15 17:09:18', NULL, '2024-05-15 17:09:12', '2024-05-15 17:09:18'),
+(72, 'App\\Models\\Admin', 1, 'token', 'b38228adb941859d911c51fb39b98fb3b1a1f7cb5a2b62c7e8afa42653209b20', '[\"*\"]', '2024-05-15 22:37:19', NULL, '2024-05-15 22:03:24', '2024-05-15 22:37:19'),
+(73, 'App\\Models\\Medecin', 6, 'token', 'b7f8972741fafad4c6ac9d035735bacc52dc90729bedf1c9d112eae3f964e198', '[\"*\"]', '2024-05-15 23:09:06', NULL, '2024-05-15 22:37:56', '2024-05-15 23:09:06'),
+(74, 'App\\Models\\Medecin', 6, 'token', 'd13a2e4b1c3936280db363c75a92d602b809abfa54cb817729a1f0306e6a2d06', '[\"*\"]', '2024-05-15 23:50:30', NULL, '2024-05-15 23:33:01', '2024-05-15 23:50:30'),
+(75, 'App\\Models\\Medecin', 6, 'token', '7109c84f05c9c192adc100d19bd9edb64431afc7a8b2b0e6fe8353553d214380', '[\"*\"]', '2024-05-15 23:50:58', NULL, '2024-05-15 23:50:37', '2024-05-15 23:50:58');
 
 -- --------------------------------------------------------
 
@@ -396,13 +411,13 @@ ALTER TABLE `administrateurs`
 -- AUTO_INCREMENT pour la table `fiche_medical`
 --
 ALTER TABLE `fiche_medical`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `medecins`
 --
 ALTER TABLE `medecins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `migrations`
@@ -414,13 +429,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT pour la table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT pour la table `roles`
