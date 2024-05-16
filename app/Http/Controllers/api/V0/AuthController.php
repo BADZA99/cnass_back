@@ -164,10 +164,10 @@ class AuthController extends Controller
         $role = Role::where('libelle', 'admin')->first();
         $code = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
         // verifier si l'email n'est pas encore enregistre dans la bdd
-        $email = $request->Email;
-        $emailExistAmongPatient = Medecin::where('Email', $email)->first();
+        $email = $request->email;
+        $emailExistAmongPatient = Patient::where('email', $email)->first();
         $emailExistAmongAdmin = Admin::where('email', $email)->first();
-        $emailExistAmongMedecin = Medecin::where('Email', $email)->first();
+        $emailExistAmongMedecin = Medecin::where('email', $email)->first();
         $emailExist = $emailExistAmongPatient || $emailExistAmongAdmin || $emailExistAmongMedecin;
 
         if ($emailExist) {

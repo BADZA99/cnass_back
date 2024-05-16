@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\api\v0;
 
 use App\Http\Controllers\Controller;
+use App\Models\Fiche_Medical;
 use App\Models\Patient;
+use App\Notifications\SuppressionPatientReussiNotification;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -42,15 +44,29 @@ class PatientController extends Controller
         // supprimer un patient
         public function deletePatient($id)
         {
-            $patient = Patient::find($id);
-
-            if(!$patient){
-                return response()->json(['message' => 'Patient introuvable'], 404);
+            // supprimer d'abord sa fiche medicale
+            $fiche = Fiche_Medical::where('id_patient', $id)->delete();
+            if($fiche){
+                $patient = Patient::find($id);
+                if(!$patient){
+                    return response()->json(['message' => 'Patient introuvable'], 404);
+                }else{
+                // notifier le patient a suuprimer par email
+                $patient->notify(new SuppressionPatientReussiNotification(
+                    $patient->Nom,
+                    $patient->Prenom,
+                ));
+                    $deleted=$patient->delete();
+                    
+                    if ($deleted) {
+                        return response()->json(['message' => 'Patient supprime avec succes'], 200);
+                    } else {
+                    return response()->json(['message' => 'erreur lors de la suppresion du patient'], 404);
+                
+                    }
+                    
+                }
             }
-
-            $patient->delete();
-
-            return response()->json(['message' => 'Patient supprime avec succes'], 200);
         }
 
         // desactiver un patient

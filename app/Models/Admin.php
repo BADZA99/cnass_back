@@ -21,7 +21,7 @@ class Admin extends Model
         'email',
         'password',
         'telephone',
-        'Statut',
+        'statut',
     ];
 
     // LE NOM DE LA TABLE
