@@ -58,7 +58,7 @@ class CreationFicheMedecalReussiNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-        ->line('Bonjour '.$this->nom.' '.$this->prenom)
+        ->greeting('Bonjour '.$this->prenom.' '.$this->nom)
             ->line('Votre fiche médicale a été créée avec succès.')
             ->line('Voici les détails de votre fiche médicale:')
             ->line('Taille: ' . $this->taille.'cm')

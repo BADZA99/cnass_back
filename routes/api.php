@@ -1,13 +1,21 @@
 <?php
 
-use App\Http\Controllers\api\v0\AdminController;
+// use App\Http\Controllers\api\v0\AdminController;
+// use App\Http\Controllers\api\V0\AuthController;
+// use App\Http\Controllers\api\v0\FicheMedicalController;
+// use App\Http\Controllers\api\v0\MedecinController;
+// use App\Http\Controllers\api\v0\PatientController;
+// use App\Http\Controllers\api\V0\RoleController;
+// use App\Http\Controllers\api\v0\SmsController;
+// use App\Http\Controllers\api\v0\SpecialitesController;
+use App\Http\Controllers\api\V0\AdminController;
 use App\Http\Controllers\api\V0\AuthController;
-use App\Http\Controllers\api\v0\FicheMedicalController;
-use App\Http\Controllers\api\v0\MedecinController;
-use App\Http\Controllers\api\v0\PatientController;
+use App\Http\Controllers\api\V0\FicheMedicalController;
+use App\Http\Controllers\api\V0\MedecinController;
+use App\Http\Controllers\api\V0\PatientController;
 use App\Http\Controllers\api\V0\RoleController;
-use App\Http\Controllers\api\v0\SmsController;
-use App\Http\Controllers\api\v0\SpecialitesController;
+use App\Http\Controllers\api\V0\SmsController;
+use App\Http\Controllers\api\V0\SpecialitesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
